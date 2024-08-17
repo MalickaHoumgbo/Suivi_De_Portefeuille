@@ -1,0 +1,27 @@
+<!-- 
+ ce fichier est un template HTML qui hérite du fichier base.html 
+ et ajoute du contenu spécifique pour afficher une liste de fonds dans une table
+-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Fonds</h2>
+  <table class="table table-bordered">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nom</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for fond in fonds %}
+          <tr>
+              <td>{{ fond.id }}</td>
+              <td>{{ fond.name }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+ {% endblock %}
+  

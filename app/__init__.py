@@ -13,6 +13,10 @@ def create_app():
 
     db.init_app(app)
 
+    # Importer et enregistrer le blueprint
+    from .routes import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
     with app.app_context():
         from . import routes
         db.create_all()

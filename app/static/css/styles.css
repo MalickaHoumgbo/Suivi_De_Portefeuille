@@ -1,0 +1,14 @@
+body {
+    padding-top: 50px;
+    font-family: Arial, sans-serif; /* Police de texte */
+}
+
+/* Styles pour la barre de navigation en mode sombre */
+[data-bs-theme="dark"] .navbar {
+    background-color: #222; /* Couleur de fond sombre */
+}
+
+[data-bs-theme="dark"] .navbar .nav-link, 
+[data-bs-theme="dark"] .navbar .navbar-brand {
+    color: #947575; /* Texte blanc pour un bon contraste */
+}

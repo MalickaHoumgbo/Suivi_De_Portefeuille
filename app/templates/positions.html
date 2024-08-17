@@ -1,0 +1,28 @@
+<!--  
+ Ce fichier  affiche des informations sur les positions d'un fonds spécifique dans une table
+-->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Positions pour le fond ID {{ positions[0].fond_id }}</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Instrument</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for position in positions %}
+        <tr>
+            <td>{{ position.id }}</td>
+            <td>{{ position.instrument.name }}</td>
+            <td>{{ position.quantity }}</td>
+            <td>{{ position.price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

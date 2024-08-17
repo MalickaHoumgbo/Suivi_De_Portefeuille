@@ -1,0 +1,26 @@
+<!-- 
+ ce fichier est un template HTML qui hérite du fichier base.html 
+ et ajoute du contenu spécifique pour afficher une liste des instruments dans une table
+-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Instruments</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for instrument in instruments %}
+         <tr>
+             <td>{{ instrument.id }}</td>
+             <td>{{ instrument.name }}</td>
+         </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
