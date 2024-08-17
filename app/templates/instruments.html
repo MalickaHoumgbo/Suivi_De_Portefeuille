@@ -3,23 +3,43 @@
  et ajoute du contenu spécifique pour afficher une liste des instruments dans une table
 -->
 
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-<h2>Instruments</h2>
-<table class="table table-bordered">
+<h2>Liste des Instruments</h2>
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Nom</th>
+            <!-- <th>ID</th>-->
+            <th>Nom de l'Instrument</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         {% for instrument in instruments %}
-         <tr>
-             <td>{{ instrument.id }}</td>
-             <td>{{ instrument.name }}</td>
-         </tr>
+        <tr>
+            <!--<td>{{ instrument.id }}</td>-->
+            <td>{{ instrument.nom_instrument }}</td>
+            <td>{{ instrument.type_instrument }}</td>
+            <td>{{ instrument.description }}</td>
+            <td>
+                <!-- Formulaire de mise à jour -->
+                <form action="{{ url_for('main.update_instrument_route', instrument_id=instrument.id) }}" method="POST" class="d-inline">
+                    <input type="text" name="new_name" value="{{ instrument.nom_instrument }}" class="form-control mb-2">
+                    <input type="text" name="new_type" value="{{ instrument.type_instrument }}" class="form-control mb-2">
+                    <textarea name="new_description" class="form-control mb-2">{{ instrument.description }}</textarea>
+                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                </form>
+
+                <!-- Bouton de suppression -->
+                <form action="{{ url_for('main.delete_instrument_route', instrument_id=instrument.id) }}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>

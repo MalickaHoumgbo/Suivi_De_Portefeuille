@@ -3,25 +3,41 @@
  et ajoute du contenu spécifique pour afficher une liste de fonds dans une table
 -->
 
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-  <h2>Fonds</h2>
-  <table class="table table-bordered">
-      <thead>
-          <tr>
-              <th>ID</th>
-              <th>Nom</th>
-          </tr>
-      </thead>
-      <tbody>
-          {% for fond in fonds %}
-          <tr>
-              <td>{{ fond.id }}</td>
-              <td>{{ fond.name }}</td>
-          </tr>
-          {% endfor %}
-      </tbody>
-  </table>
- {% endblock %}
-  
+<h2>Liste des Fonds</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom du Fond</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fond in fonds %}
+        <tr>
+            <td>{{ fond.id }}</td>
+            <td>{{ fond.nom_fond }}</td>
+            <td>{{ fond.description }}</td>
+            <td>
+                <!-- Formulaire de mise à jour -->
+                <form action="{{ url_for('main.update_fond_route', fond_id=fond.id) }}" method="POST" class="d-inline">
+                    <input type="text" name="new_name" value="{{ fond.nom_fond }}" class="form-control mb-2">
+                    <textarea name="new_description" class="form-control mb-2">{{ fond.description }}</textarea>
+                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                </form>
+
+                <!-- Bouton de suppression -->
+                <form action="{{ url_for('main.delete_fond_route', fond_id=fond.id) }}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

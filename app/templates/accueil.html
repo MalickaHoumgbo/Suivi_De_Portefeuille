@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="mt-5">Bienvenue sur l'application de Suivi de Portefeuille</h1>
+    <p>Cliquez sur les options du menu pour voir les fonds et les instruments.</p>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <a href="{{ url_for('main.view_fonds') }}" class="btn btn-primary btn-block">Voir les Fonds</a>
+        </div>
+        <div class="col-md-6">
+            <a href="{{ url_for('main.view_instruments') }}" class="btn btn-primary btn-block">Voir les Instruments</a>
+        </div>
+    </div>
+{% endblock %}
