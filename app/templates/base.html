@@ -1,32 +1,44 @@
 <!-- Ce fichier est un template de base qui contient la structure HTML 
  commune à toutes les pages (notemment menu de navigation, le footer). 
  -->
+
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
- <head>
+ <html lang="en" data-bs-theme="light">
+  <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Portefeuille</title>
      <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
- </head>
+     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+  </head>
  <body>
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <!-- Barre de navigation -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
          <a class="navbar-brand" href="#">
              <img src="{{ url_for('static', filename='img/logo_entreprise.png') }}" alt="Logo" style="max-width: 40px; margin-right: 10px;">
              Suivi de Portefeuille
          </a>
-         <div class="collapse navbar-collapse">
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
              <ul class="navbar-nav mr-auto">
+                 <li class="nav-item"><a class="nav-link" href="{{ url_for('main.home') }}">Home</a></li>
                  <li class="nav-item"><a class="nav-link" href="{{ url_for('main.view_fonds') }}">Fonds</a></li>
                  <li class="nav-item"><a class="nav-link" href="{{ url_for('main.view_instruments') }}">Instruments</a></li>
              </ul>
          </div>
          <button id="toggle-theme" class="btn btn-secondary">Mode sombre</button>
      </nav>
-     <div class="container">
+ 
+     <!-- Contenu principal -->
+     <div class="container mt-4">
          {% block content %}{% endblock %}
      </div>
+ 
+     <!-- Pied de page -->
      <footer class="bg-light text-center text-lg-start">
          <div class="container p-4">
              <div class="row">
@@ -39,9 +51,10 @@
              © 2024 Amiral Gestion. All rights reserved.
          </div>
      </footer>
+ 
      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
      <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-</body>
-</html>
+ </body>
+ </html>

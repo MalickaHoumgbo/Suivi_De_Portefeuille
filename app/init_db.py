@@ -6,7 +6,8 @@ import mysql.connector
 db_config = {
     'user': 'root',
     'password': 'root',
-    'host': 'localhost'
+    'host': 'localhost',
+    'database': 'portfolio_db'
 }
 
 # Connexion à MySQL

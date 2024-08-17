@@ -83,3 +83,24 @@ def delete_position_route(position_id):
     db.session.delete(position)
     db.session.commit()
     return redirect(url_for('main.view_positions', fond_id=fond_id))
+
+# Route pour ajouter un nouveau fond
+@main.route('/add_fond', methods=['POST'])
+def add_fond():
+    name = request.form['new_fond_name']
+    description = request.form['new_fond_description']
+    new_fond = ReferentielFonds(nom_fond=name, description=description)
+    db.session.add(new_fond)
+    db.session.commit()
+    return redirect(url_for('main.view_fonds'))
+
+# Route pour ajouter un nouvel instrument
+@main.route('/add_instrument', methods=['POST'])
+def add_instrument():
+    name = request.form['new_instrument_name']
+    type_ = request.form['new_instrument_type']
+    description = request.form['new_instrument_description']
+    new_instrument = ReferentielInstruments(nom_instrument=name, type_instrument=type_, description=description)
+    db.session.add(new_instrument)
+    db.session.commit()
+    return redirect(url_for('main.view_instruments'))
