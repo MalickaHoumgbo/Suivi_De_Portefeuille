@@ -16,9 +16,9 @@ def view_fonds():
 @app.route('/instruments')
 def view_instruments():
     instruments = ReferentielInstruments.query.all()
-    return render_template('static/templates/instruments.html', instruments=instruments)
+    return render_template('instruments.html', instruments=instruments)
 
 @app.route('/positions/<int:fond_id>')
 def view_positions(fond_id):
     positions = Positions.query.filter_by(fond_id=fond_id).all()
-    return render_template('static/templates/positions.html', positions=positions)
+    return render_template('/positions.html', positions=positions)
