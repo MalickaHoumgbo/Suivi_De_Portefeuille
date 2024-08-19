@@ -1,5 +1,5 @@
 """
-Ce fichier définit l'URI de la base de données MySQL (l'adresse et les 
+Ce fichier définit l'URL de la base de données MySQL (l'adresse et les 
 informations de connexion à la base de données).
 """
 import os

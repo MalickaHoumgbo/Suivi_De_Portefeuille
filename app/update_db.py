@@ -92,6 +92,17 @@ def delete_position(cursor, position_id):
     except mysql.connector.Error as err:
         print(f"Erreur lors de la suppression de la position {position_id}: {err}")
 
+def add_position(cursor,  instrument_id, quantite, prix_achat, date_achat, prix_actuel, valeur_totale, rendement, date_derniere_transaction):
+    try:
+        cursor.execute("""
+        INSERT INTO positions ( instrument_id, quantite, prix_achat, date_achat, prix_actuel, valeur_totale, rendement, date_derniere_transaction) 
+        VALUES ( %s, %s, %s, %s, %s, %s, %s, %s)
+        """, ( instrument_id, quantite, prix_achat, date_achat, prix_actuel, valeur_totale, rendement, date_derniere_transaction))
+        print(f"Nouvelle position ajoutée avec succès.")
+    except mysql.connector.Error as err:
+        print(f"Erreur lors de l'ajout de la position: {err}")
+
+
 # Exemple de tests avec des IDs spécifiques
 try:
     update_fond(cursor, 1, 'Fonds Alpha Modifié', 'Actions', 'Gestionnaire Alpha', 'Objectif modifié', '2024-02-01', 1100000.00, 155.00, 'USD', 'US0000000001')
@@ -104,6 +115,7 @@ try:
 
     update_position(cursor, 1, 120, 155.00, '2024-01-15', 180.00, 21600.00, 16.67, '2024-02-01')
     delete_position(cursor, 3)  # Suppression d'une position avec un ID au hasard
+    add_position(cursor, 2, 100, 150.00, '2024-02-01', 170.00, 17000.00, 13.33, '2024-02-15')
 except mysql.connector.Error as err:
     print(f"Erreur lors de l'exécution des opérations: {err}")
 
