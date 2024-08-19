@@ -37,11 +37,6 @@ def view_positions(fond_id):
     return render_template('positions.html', fond=fond, positions=positions)
 
 
-"""@main.route('/positions/<int:fond_id>')
-def view_positions(fond_id):
-    positions = Positions.query.filter_by(fond_id=fond_id).all()
-    return render_template('positions.html', positions=positions, fond_id=fond_id)"""
-
 # Route pour afficher la page d'ajout d'un fond
 @main.route('/ajout_fond', methods=['GET'])
 def ajout_fond():
@@ -61,7 +56,7 @@ def add_fond():
         devise_fond = request.form['new_devise_fond']
         code_isin = request.form['new_code_isin']
 
-        if not name or not type_fond or not nom_gestionnaire:
+        if not name or not type_fond or not nom_gestionnaire or not objectif_fond or not date_creation or not aum or not valeur_liquidative or not devise_fond or not code_isin:
             flash('Tous les champs doivent être remplis!', 'danger')
             return redirect(url_for('main.ajout_fond'))
 
@@ -102,7 +97,7 @@ def add_instrument():
         prix_actuel = float(request.form['new_prix_actuel'])
         volatilite = float(request.form['new_volatilite'])
 
-        if not name or not type_ or not code_isin:
+        if not name or not type_ or not secteur or not code_isin or not devise or not prix_actuel or not volatilite:
             flash('Tous les champs doivent être remplis!', 'danger')
             return redirect(url_for('main.ajout_instrument'))
 
@@ -188,7 +183,7 @@ def update_fond_route(fond_id):
         return redirect(url_for('main.view_fonds'))
 
 # Route pour supprimer un fond
-@main.route('/delete_fond/<int:fond_id>')
+@main.route('/delete_fond/<int:fond_id>',methods=['POST'])
 def delete_fond_route(fond_id):
     try:
         fond = ReferentielFonds.query.get_or_404(fond_id)
@@ -220,7 +215,7 @@ def update_instrument_route(instrument_id):
     return redirect(url_for('main.view_instruments'))
 
 # Route pour supprimer un instrument
-@main.route('/delete_instrument/<int:instrument_id>')
+@main.route('/delete_instrument/<int:instrument_id>', methods=['POST'])
 def delete_instrument_route(instrument_id):
     try:
         instrument = ReferentielInstruments.query.get_or_404(instrument_id)
@@ -252,7 +247,7 @@ def update_position_route(position_id):
     return redirect(url_for('main.view_positions', fond_id=position.fond_id))
 
 # Route pour supprimer une position
-@main.route('/delete_position/<int:position_id>')
+@main.route('/delete_position/<int:position_id>', methods=['POST'])
 def delete_position_route(position_id):
     try:
         position = Positions.query.get_or_404(position_id)

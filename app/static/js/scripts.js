@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             htmlElement.setAttribute('data-bs-theme', savedTheme);
             toggleButton.textContent = savedTheme === 'dark' ? 'Mode clair' : 'Mode sombre';
         } else {
-            // Par défaut, charger le thème clair
+            // Par défaut,  thème clair est chargé
             htmlElement.setAttribute('data-bs-theme', 'light');
             toggleButton.textContent = 'Mode sombre';
         }
@@ -32,10 +32,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const addFondForm = document.querySelector('form[action*="add_fond"]');
     if (addFondForm) {
         addFondForm.addEventListener('submit', (event) => {
-            const name = addFondForm.querySelector('input[name="new_fond_name"]').value;
-            const description = addFondForm.querySelector('textarea[name="new_fond_objectif"]').value; // Correction ici
+            const nomFond = addFondForm.querySelector('input[name="nom_fond"]').value;
+            const typeFond = addFondForm.querySelector('input[name="type_fond"]').value;
+            const nomGestionnaire = addFondForm.querySelector('input[name="nom_gestionnaire"]').value;
+            const objectifFond = addFondForm.querySelector('textarea[name="objectif_fond"]').value;
+            const dateCreation = addFondForm.querySelector('input[name="date_creation"]').value;
+            const aum = addFondForm.querySelector('input[name="aum"]').value;
+            const valeurLiquidative = addFondForm.querySelector('input[name="valeur_liquidative"]').value;
+            const deviseFond = addFondForm.querySelector('input[name="devise_fond"]').value;
+            const codeIsin = addFondForm.querySelector('input[name="code_isin"]').value;
 
-            if (!name || !description) {
+            if (!nomFond || !typeFond || !nomGestionnaire || !objectifFond || !dateCreation || !aum || !valeurLiquidative || !deviseFond || !codeIsin) {
                 alert('Veuillez remplir tous les champs du formulaire.');
                 event.preventDefault();
             }
@@ -46,11 +53,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const addInstrumentForm = document.querySelector('form[action*="add_instrument"]');
     if (addInstrumentForm) {
         addInstrumentForm.addEventListener('submit', (event) => {
-            const name = addInstrumentForm.querySelector('input[name="new_instrument_name"]').value;
-            const type = addInstrumentForm.querySelector('input[name="new_instrument_type"]').value;
-            const description = addInstrumentForm.querySelector('textarea[name="new_instrument_description"]').value;
+            const nomInstrument = addInstrumentForm.querySelector('input[name="nom_instrument"]').value;
+            const typeInstrument = addInstrumentForm.querySelector('input[name="type_instrument"]').value;
+            const secteur = addInstrumentForm.querySelector('input[name="secteur"]').value;
+            const codeIsin = addInstrumentForm.querySelector('input[name="code_isin"]').value;
+            const devise = addInstrumentForm.querySelector('input[name="devise"]').value;
+            const prixActuel = addInstrumentForm.querySelector('input[name="prix_actuel"]').value;
+            const volatilite = addInstrumentForm.querySelector('input[name="volatilite"]').value;
 
-            if (!name || !type || !description) {
+            if (!nomInstrument || !typeInstrument || !secteur || !codeIsin || !devise || !prixActuel || !volatilite) {
+                alert('Veuillez remplir tous les champs du formulaire.');
+                event.preventDefault();
+            }
+        });
+    }
+
+    // Validation des formulaires d'ajout de position
+    const addPositionForm = document.querySelector('form[action*="add_position"]');
+    if (addPositionForm) {
+        addPositionForm.addEventListener('submit', (event) => {
+            const fondId = addPositionForm.querySelector('input[name="fond_id"]').value;
+            const instrumentId = addPositionForm.querySelector('input[name="instrument_id"]').value;
+            const quantite = addPositionForm.querySelector('input[name="quantite"]').value;
+            const prixAchat = addPositionForm.querySelector('input[name="prix_achat"]').value;
+            const dateAchat = addPositionForm.querySelector('input[name="date_achat"]').value;
+            const prixActuel = addPositionForm.querySelector('input[name="prix_actuel"]').value;
+            const valeurTotale = addPositionForm.querySelector('input[name="valeur_totale"]').value;
+            const rendement = addPositionForm.querySelector('input[name="rendement"]').value;
+            const dateDerniereTransaction = addPositionForm.querySelector('input[name="date_derniere_transaction"]').value;
+
+            if (!fondId || !instrumentId || !quantite || !prixAchat || !dateAchat || !prixActuel || !valeurTotale || !rendement || !dateDerniereTransaction) {
                 alert('Veuillez remplir tous les champs du formulaire.');
                 event.preventDefault();
             }
