@@ -96,7 +96,6 @@ def add_instrument():
         devise = request.form['new_devise']
         prix_actuel = float(request.form['new_prix_actuel'])
         volatilite = float(request.form['new_volatilite'])
-
         if not name or not type_ or not secteur or not code_isin or not devise or not prix_actuel or not volatilite:
             flash('Tous les champs doivent être remplis!', 'danger')
             return redirect(url_for('main.ajout_instrument'))

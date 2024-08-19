@@ -17,7 +17,7 @@ db_config = {
 conn = mysql.connector.connect(**db_config)
 cursor = conn.cursor()
 
-# Définir les fonctions pour mettre à jour et supprimer les données
+# Définir les fonctions pour mettre à jour , ajouter et supprimer les données
 def update_fond(cursor, fond_id, new_nom, new_type, new_gestionnaire, new_objectif, new_date_creation, new_aum, new_devise, new_code_isin):
     try:
         cursor.execute("""
