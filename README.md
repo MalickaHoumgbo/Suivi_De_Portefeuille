@@ -16,7 +16,7 @@
 
 ## Introduction
 
-Décrivez en détail votre projet, son objectif principal, et les problèmes qu'il résout. Mentionnez également les technologies principales utilisées.
+C'est une application web qui permet de voir la liste des fonds, la liste des instruments et les positions d'un fond.
 
 ## Fonctionnalités
 
