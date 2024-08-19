@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="text-secondary fst-italic mt-2">Ajouter une Nouvelle Position</h2>
+    <form action="{{ url_for('main.add_position') }}" method="POST">
+        <div class="form-group mb-3">
+            <select name="fond_id" class="form-control" required>
+                <option value="" disabled selected>Choisir un Fond</option>
+                {% for fond in fonds %}
+                <option value="{{ fond.id }}">{{ fond.nom_fond }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <select name="instrument_id" class="form-control" required>
+                <option value="" disabled selected>Choisir un Instrument</option>
+                {% for instrument in instruments %}
+                <option value="{{ instrument.id }}">{{ instrument.nom_instrument }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <input type="number" name="quantite" class="form-control" placeholder="Quantité" required>
+        </div>
+        <div class="form-group mb-3">
+            <input type="number" name="prix_achat" class="form-control" placeholder="Prix d'Achat" required>
+        </div>
+        <div class="form-group mb-3">
+            <input type="date" name="date_achat" class="form-control" placeholder="Date d'Achat" required>
+        </div>
+        <button type="submit" class="btn btn-success">Ajouter</button>
+    </form>
+</div>
+
+{% endblock %}

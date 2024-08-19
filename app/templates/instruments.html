@@ -10,29 +10,21 @@
 
 <!-- Formulaire pour ajouter un nouvel instrument -->
 <div class="mb-4">
-    <h3 class="text-secondary fst-italic mt-2">Ajouter un Nouvel Instrument</h3>
-    <form action="{{ url_for('main.add_instrument') }}" method="POST">
-        <div class="form-group mb-3">
-            <input type="text" name="new_instrument_name" class="form-control" placeholder="Nom de l'Instrument" required>
-        </div>
-        <div class="form-group mb-3">
-            <input type="text" name="new_instrument_type" class="form-control" placeholder="Type de l'Instrument" required>
-        </div>
-        <div class="form-group mb-3">
-            <textarea name="new_instrument_description" class="form-control" placeholder="Description" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Ajouter</button>
-    </form>
+    <a href="{{ url_for('main.ajout_instrument') }}" class="btn btn-primary">Ajouter un Instrument</a>
 </div>
 
 <!-- Tableau des instruments existants -->
-<table class="table table-striped">
-    <thead>
+<table class="table table-striped table-sm table-bordered">
+    <thead class="table-light">
         <tr>
             <th>ID</th>
             <th>Nom de l'Instrument</th>
             <th>Type</th>
-            <th>Description</th>
+            <th>Secteur</th>
+            <th>Code ISIN</th>
+            <th>Devise</th>
+            <th>Prix Actuel</th>
+            <th>Volatilité</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -40,14 +32,23 @@
         {% for instrument in instruments %}
         <tr>
             <td>{{ instrument.id }}</td>
-            <td>{{ instrument.nom_instrument }}</td>
+            <td class="text-nowrap">{{ instrument.nom_instrument }}</td>
             <td>{{ instrument.type_instrument }}</td>
-            <td>{{ instrument.description }}</td>
-            <td>
+            <td>{{ instrument.secteur }}</td>
+            <td>{{ instrument.code_isin }}</td>
+            <td>{{ instrument.devise }}</td>
+            <td>{{ instrument.prix_actuel }}</td>
+            <td>{{ instrument.volatilite }}</td>
+            <td class="text-nowrap">
                 <!-- Formulaire de mise à jour -->
                 <form action="{{ url_for('main.update_instrument_route', instrument_id=instrument.id) }}" method="POST" class="d-inline">
                     <input type="text" name="new_name" value="{{ instrument.nom_instrument }}" class="form-control mb-2" placeholder="Nom de l'Instrument" style="opacity: 0.7;">
                     <input type="text" name="new_type" value="{{ instrument.type_instrument }}" class="form-control mb-2" placeholder="Type" style="opacity: 0.7;">
+                    <input type="text" name="new_secteur" value="{{ instrument.secteur }}" class="form-control mb-2" placeholder="Secteur" style="opacity: 0.7;">
+                    <input type="text" name="new_code_isin" value="{{ instrument.code_isin }}" class="form-control mb-2" placeholder="Code ISIN" style="opacity: 0.7;">
+                    <input type="text" name="new_devise" value="{{ instrument.devise }}" class="form-control mb-2" placeholder="Devise" style="opacity: 0.7;">
+                    <input type="number" name="new_prix_actuel" value="{{ instrument.prix_actuel }}" class="form-control mb-2" placeholder="Prix Actuel" step="0.01" style="opacity: 0.7;">
+                    <input type="number" name="new_volatilite" value="{{ instrument.volatilite }}" class="form-control mb-2" placeholder="Volatilité" step="0.01" style="opacity: 0.7;">
                     <textarea name="new_description" class="form-control mb-2" placeholder="Description" style="opacity: 0.7;">{{ instrument.description }}</textarea>
                     <button type="submit" class="btn btn-primary">Mettre à jour</button>
                 </form>

@@ -6,20 +6,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2 class="mt-5">Liste des Fonds</h2>
+<h2 class="text-primary fw-bold mb-3">Liste des Fonds</h2>
 
-<!-- Formulaire pour ajouter un nouveau fond -->
 <div class="mb-4">
-    <h3>Ajouter un Nouveau Fond</h3>
-    <form action="{{ url_for('main.add_fond') }}" method="POST">
-        <div class="form-group mb-3">
-            <input type="text" name="new_fond_name" class="form-control" placeholder="Nom du Fond" required>
-        </div>
-        <div class="form-group mb-3">
-            <textarea name="new_fond_description" class="form-control" placeholder="Description" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Ajouter</button>
-    </form>
+    <a href="{{ url_for('main.ajout_fond') }}" class="btn btn-primary">Ajouter un Fond</a>
 </div>
 
 <!-- Tableau des fonds existants -->
@@ -28,7 +18,14 @@
         <tr>
             <th>ID</th>
             <th>Nom du Fond</th>
-            <th>Description</th>
+            <th>Type</th>
+            <th>Gestionnaire</th>
+            <th>Objectif</th>
+            <th>Date de Création</th>
+            <th>AUM</th>
+            <th>Valeur Liquidative</th>
+            <th>Devise</th>
+            <th>Code ISIN</th>
             <th>Positions</th>
             <th>Actions</th>
         </tr>
@@ -38,16 +35,29 @@
         <tr>
             <td>{{ fond.id }}</td>
             <td class="text-nowrap">{{ fond.nom_fond }}</td>
-            <td class="text-truncate" style="max-width: 250px;">{{ fond.description }}</td>
+            <td>{{ fond.type_fond }}</td>
+            <td>{{ fond.nom_gestionnaire }}</td>
+            <td>{{ fond.objectif_fond }}</td>
+            <td>{{ fond.date_creation.strftime('%Y-%m-%d') if fond.date_creation else 'N/A' }}</td>
+            <td>{{ fond.aum }}</td>
+            <td>{{ fond.valeur_liquidative }}</td>
+            <td>{{ fond.devise_fond }}</td>
+            <td>{{ fond.code_isin }}</td>
             <td>
-                <!-- Lien vers les positions -->
-                <a href="{{ url_for('main.view_positions', fond_id=fond.id) }}" class="btn btn-info btn-sm">Voir les Positions</a>
+                <a href="{{ url_for('main.view_positions', fond_id=fond.id) }}" class="btn btn-info">Voir Positions</a>
             </td>
             <td class="text-nowrap">
                 <!-- Formulaire de mise à jour -->
                 <form action="{{ url_for('main.update_fond_route', fond_id=fond.id) }}" method="POST" class="d-inline">
                     <input type="text" name="new_name" value="{{ fond.nom_fond }}" class="form-control mb-2" placeholder="Nom du Fond" style="opacity: 0.7;">
-                    <textarea name="new_description" class="form-control mb-2" placeholder="Description" style="opacity: 0.7;">{{ fond.description }}</textarea>
+                    <input type="text" name="new_type" value="{{ fond.type_fond }}" class="form-control mb-2" placeholder="Type">
+                    <input type="text" name="new_nom_gestionnaire" value="{{ fond.nom_gestionnaire }}" class="form-control mb-2" placeholder="Gestionnaire">
+                    <textarea name="new_objectif" class="form-control mb-2" placeholder="Objectif" style="opacity: 0.7;">{{ fond.objectif_fond }}</textarea>
+                    <input type="date" name="new_date_creation" value="{{ fond.date_creation.strftime('%Y-%m-%d') if fond.date_creation else '' }}" class="form-control mb-2">
+                    <input type="number" name="new_aum" value="{{ fond.aum }}" class="form-control mb-2" placeholder="AUM">
+                    <input type="number" name="new_valeur_liquidative" value="{{ fond.valeur_liquidative }}" class="form-control mb-2" placeholder="Valeur Liquidative">
+                    <input type="text" name="new_devise_fond" value="{{ fond.devise_fond }}" class="form-control mb-2" placeholder="Devise">
+                    <input type="text" name="new_code_isin" value="{{ fond.code_isin }}" class="form-control mb-2" placeholder="Code ISIN">
                     <button type="submit" class="btn btn-primary">Mettre à jour</button>
                 </form>
 
@@ -56,8 +66,6 @@
                     <button type="submit" class="btn btn-danger">Supprimer</button>
                 </form>
             </td>
-           
-
         </tr>
         {% endfor %}
     </tbody>

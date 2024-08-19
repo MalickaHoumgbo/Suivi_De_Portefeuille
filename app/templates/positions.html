@@ -4,16 +4,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Positions pour le Fond {{ fond_id }}</h2>
+<div class="mb-4">
+    <a href="{{ url_for('main.ajout_position') }}" class="btn btn-primary">Ajouter une Position</a>
+</div>
 
-<table class="table table-striped">
-    <thead>
+<h2 class="text-primary fw-bold mb-3">Positions pour le Fond {{ fond.nom_fond }} (ID: {{ fond.id }})</h2>
+
+
+<table class="table table-striped table-sm table-bordered">
+    <thead class="table-light">
         <tr>
             <th>ID</th>
             <th>Instrument</th>
             <th>Quantité</th>
             <th>Prix d'Achat</th>
             <th>Date d'Achat</th>
+            <th>Prix Actuel</th>
+            <th>Valeur Totale</th>
+            <th>Rendement</th>
+            <th>Date Dernière Transaction</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -21,16 +30,24 @@
         {% for position in positions %}
         <tr>
             <td>{{ position.id }}</td>
-            <td>{{ position.instrument.nom_instrument }}</td>
+            <td class="text-nowrap">{{ position.instrument.nom_instrument }}</td>
             <td>{{ position.quantite }}</td>
             <td>{{ position.prix_achat }}</td>
-            <td>{{ position.date_achat }}</td>
-            <td>
+            <td>{{ position.date_achat.strftime('%Y-%m-%d') }}</td>
+            <td>{{ position.prix_actuel }}</td>
+            <td>{{ position.valeur_totale }}</td>
+            <td>{{ position.rendement }}</td>
+            <td>{{ position.date_derniere_transaction.strftime('%Y-%m-%d') if position.date_derniere_transaction else 'N/A' }}</td>
+            <td class="text-nowrap">
                 <!-- Formulaire de mise à jour -->
                 <form action="{{ url_for('main.update_position_route', position_id=position.id) }}" method="POST" class="d-inline">
-                    <input type="number" name="new_quantite" value="{{ position.quantite }}" class="form-control mb-2">
-                    <input type="text" name="new_prix_achat" value="{{ position.prix_achat }}" class="form-control mb-2">
-                    <input type="date" name="new_date_achat" value="{{ position.date_achat }}" class="form-control mb-2">
+                    <input type="number" name="new_quantite" value="{{ position.quantite }}" class="form-control mb-2" step="0.01">
+                    <input type="number" name="new_prix_achat" value="{{ position.prix_achat }}" class="form-control mb-2" step="0.01">
+                    <input type="date" name="new_date_achat" value="{{ position.date_achat.strftime('%Y-%m-%d') }}" class="form-control mb-2">
+                    <input type="number" name="new_prix_actuel" value="{{ position.prix_actuel }}" class="form-control mb-2" step="0.01">
+                    <input type="number" name="new_valeur_totale" value="{{ position.valeur_totale }}" class="form-control mb-2" step="0.01">
+                    <input type="number" name="new_rendement" value="{{ position.rendement }}" class="form-control mb-2" step="0.01">
+                    <input type="date" name="new_date_derniere_transaction" value="{{ position.date_derniere_transaction.strftime('%Y-%m-%d') if position.date_derniere_transaction else '' }}" class="form-control mb-2">
                     <button type="submit" class="btn btn-primary">Mettre à jour</button>
                 </form>
 
