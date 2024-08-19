@@ -18,30 +18,16 @@
 
 C'est une application web qui permet de voir la liste des fonds, la liste des instruments et les positions d'un fond.
 
+
 ## Fonctionnalités
 
 - Gestion des fonds et instruments financiers
 - Ajout, mise à jour, et suppression des positions
 
-## Prérequis
-
-- Python 3.x
-- MySQL
-- Environnement virtuel venv
-
-## Introduction
-
-Décrivez en détail votre projet, son objectif principal, et les problèmes qu'il résout. Mentionnez également les technologies principales utilisées.
 les technologies utilisées sont: - Python et Flask
                                  - HTML, Boostrap et CSS
                                  - JavaScript et Jquery
                                  - MySQL
-
-## Fonctionnalités
-
-- Gestion des fonds et instruments financiers
-- Ajout, mise à jour, et suppression des positions
-
 
 ## Prérequis
 
@@ -50,6 +36,7 @@ les technologies utilisées sont: - Python et Flask
          *nom d'utilisateur*: root
          *mot de passe*: root
 - Environnement virtuel venv
+
 
 ## Installation
 
