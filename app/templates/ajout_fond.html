@@ -1,0 +1,41 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="mb-4">
+    <h2 class="text-secondary fst-italic mt-2">Ajouter un Nouveau Fond</h2>
+ <form action="{{ url_for('main.add_fond') }}" method="POST">
+    <div class="form-group mb-3">
+        <input type="text" name="new_fond_name" class="form-control" placeholder="Nom du Fond" required>
+    </div>
+    <div class="form-group mb-3">
+        <input type="text" name="new_fond_type" class="form-control" placeholder="Type du Fond">
+    </div>
+    <div class="form-group mb-3">
+        <input type="text" name="new_fond_nom_gestionnaire" class="form-control" placeholder="Nom du Gestionnaire">
+    </div>
+    <div class="form-group mb-3">
+        <textarea name="new_fond_objectif" class="form-control" placeholder="Objectif du Fond"></textarea>
+    </div>
+    <div class="form-group mb-3">
+        <input type="date" name="new_fond_date_creation" class="form-control" placeholder="Date de Création">
+    </div>
+    <div class="form-group mb-3">
+        <input type="number" name="new_fond_aum" class="form-control" placeholder="AUM">
+    </div>
+    <div class="form-group mb-3">
+        <input type="number" name="new_fond_valeur_liquidative" class="form-control" placeholder="Valeur Liquidative">
+    </div>
+    <div class="form-group mb-3">
+        <input type="text" name="new_fond_devise" class="form-control" placeholder="Devise du Fond">
+    </div>
+    <div class="form-group mb-3">
+        <input type="text" name="new_fond_code_isin" class="form-control" placeholder="Code ISIN">
+    </div>
+    <button type="submit" class="btn btn-success">Ajouter</button>
+ </form>
+</div>
+
+{% endblock %}

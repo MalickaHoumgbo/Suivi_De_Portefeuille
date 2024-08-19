@@ -1,0 +1,64 @@
+<!-- 
+ ce fichier est un template HTML qui hérite du fichier base.html 
+ et ajoute du contenu spécifique pour afficher une liste des instruments dans une table
+-->
+
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-primary fw-bold mb-3">Liste des Instruments</h2>
+
+<!-- Formulaire pour ajouter un nouvel instrument -->
+<div class="mb-4">
+    <a href="{{ url_for('main.ajout_instrument') }}" class="btn btn-primary">Ajouter un Instrument</a>
+</div>
+
+<!-- Tableau des instruments existants -->
+<table class="table table-striped table-sm table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>Nom de l'Instrument</th>
+            <th>Type</th>
+            <th>Secteur</th>
+            <th>Code ISIN</th>
+            <th>Devise</th>
+            <th>Prix Actuel</th>
+            <th>Volatilité</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for instrument in instruments %}
+        <tr>
+            <td>{{ instrument.id }}</td>
+            <td class="text-nowrap">{{ instrument.nom_instrument }}</td>
+            <td>{{ instrument.type_instrument }}</td>
+            <td>{{ instrument.secteur }}</td>
+            <td>{{ instrument.code_isin }}</td>
+            <td>{{ instrument.devise }}</td>
+            <td>{{ instrument.prix_actuel }}</td>
+            <td>{{ instrument.volatilite }}</td>
+            <td class="text-nowrap">
+                <!-- Formulaire de mise à jour -->
+                <form action="{{ url_for('main.update_instrument_route', instrument_id=instrument.id) }}" method="POST" class="d-inline">
+                    <input type="text" name="new_name" value="{{ instrument.nom_instrument }}" class="form-control mb-2" placeholder="Nom de l'Instrument" style="opacity: 0.7;">
+                    <input type="text" name="new_type" value="{{ instrument.type_instrument }}" class="form-control mb-2" placeholder="Type" style="opacity: 0.7;">
+                    <input type="text" name="new_secteur" value="{{ instrument.secteur }}" class="form-control mb-2" placeholder="Secteur" style="opacity: 0.7;">
+                    <input type="text" name="new_code_isin" value="{{ instrument.code_isin }}" class="form-control mb-2" placeholder="Code ISIN" style="opacity: 0.7;">
+                    <input type="text" name="new_devise" value="{{ instrument.devise }}" class="form-control mb-2" placeholder="Devise" style="opacity: 0.7;">
+                    <input type="number" name="new_prix_actuel" value="{{ instrument.prix_actuel }}" class="form-control mb-2" placeholder="Prix Actuel" step="0.01" style="opacity: 0.7;">
+                    <input type="number" name="new_volatilite" value="{{ instrument.volatilite }}" class="form-control mb-2" placeholder="Volatilité" step="0.01" style="opacity: 0.7;">
+                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                </form>
+
+                <!-- Formulaire de suppression -->
+                <form action="{{ url_for('main.delete_instrument_route', instrument_id=instrument.id) }}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
